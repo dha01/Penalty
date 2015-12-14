@@ -1,0 +1,50 @@
+﻿@using IS.Model.Item.Contact
+@model ContactItem
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<style>
+    table {
+        border: 4px double black; /* Рамка вокруг таблицы */
+        border-collapse: collapse; /* Отображать только одинарные линии */
+    }
+
+    td:first-child {
+        text-align: left; /* Выравнивание по левому краю */
+        background: #ccc; /* Цвет фона ячеек */
+        padding: 5px; /* Поля вокруг содержимого ячеек */
+        border: 1px solid black; /* Граница вокруг ячеек */
+    }
+
+    td {
+        padding: 5px; /* Поля вокруг содержимого ячеек */
+        border: 1px solid black; /* Граница вокруг ячеек */
+    }
+</style>
+
+<h2>Создание новой записи о контакте</h2>
+
+@using (@Html.BeginForm("Create", "Contact"))
+{
+    <table class="table contact">
+        <tr>
+            <td>Тип</td>
+            <td>
+                <select name="Type">
+                    @foreach (string name in Enum.GetNames(typeof(ContactType)))
+                    {
+                        <option value="@name">@name</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Значение</td>
+            <td><input type="text" name="Value" /></td>
+        </tr>
+    </table>
+    <input type="submit" value="Создать" />
+}
+@Html.ActionLink("Просмотр списка контактов", "List")

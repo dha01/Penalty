@@ -1,0 +1,155 @@
+﻿@using IS.Model.Item.Task;
+@using IS.Mvc.Models
+@model TaskItem 
+
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+	table {
+		width: 100%; /* Ширина таблицы */
+		border: 4px double black; /* Рамка вокруг таблицы */
+		border-collapse: collapse; /* Отображать только одинарные линии */
+	}
+
+	th {
+		text-align: left; /* Выравнивание по левому краю */
+		background: #ccc; /* Цвет фона ячеек */
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	td {
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	textarea {
+		width: 99%; /* Ширина поля в процентах */
+		height: 200px; /* Высота поля в пикселах */
+	} 
+</style>
+
+<h2>@Html.Raw(string.Format("{0}_{1} {2}", Model.Prefix, Model.Number, Model.Header)) (@Html.ActionLink("К списку задач", "List"))</h2>
+
+<table>
+	<tr>
+		@if (Model.IsPerform)
+		{
+			<td colspan="2" style="background-color: #32cd32">
+				Выполнена
+			</td>
+		}
+		else
+		{
+			if (string.IsNullOrEmpty(Model.Performer))
+			{
+				<td colspan="2" style="background-color: #c0c0c0">
+					Не назначена
+				</td>
+			}
+			else if (Model.IsOpen)
+			{
+				<td style="background-color: #ffd700">
+					@if (Access.CheckRole())
+					{
+						@Html.ActionLink("Сдать на проверку", "Pass", new { id = Model.Id })
+					}
+				</td>
+				<td style="background-color: #cccccc">
+					В процессе выполнения
+				</td>
+			}
+			else
+			{
+				<td>
+					@if (Access.CheckRole("Task.Updater"))
+					{
+						<div style="background-color: #ffd700">@Html.ActionLink("Отклонить", "Reject", new { id = Model.Id })</div>
+						<div style="background-color: #32cd32">@Html.ActionLink("Принять", "Accept", new { id = Model.Id })</div>
+					}
+				</td>
+				<td colspan="2" style="background-color: #ffd700">
+					Ожидает проверки
+				</td>
+			}
+		}
+	</tr>
+	<tr>
+		<td style="width: 100px">
+			Заголовок
+		</td>
+		<td>
+			@Html.DisplayTextFor(m => Model.Header)
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Сложность
+		</td>
+		<td>
+			@Html.DisplayTextFor(m => Model.Difficult)
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Приоритет
+		</td>
+		<td>
+			@Html.DisplayTextFor(m => Model.Priority)
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Описание
+		</td>
+		<td>
+			@Html.TextAreaFor(m => Model.Mem)
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Дата создания
+		</td>
+		<td>
+			@Html.DisplayTextFor(m => Model.Created)
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Срок
+		</td>
+		<td>
+			@Html.DisplayTextFor(m => Model.Deadline)
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Исполнитель
+		</td>
+		<td>
+			@Html.DisplayTextFor(m => Model.Performer)
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Pull request
+		</td>
+		<td>
+			<a href="@Model.PullRequestUrl">@Model.PullRequestUrl</a>
+		</td>
+	</tr>
+</table>
+
+@if (Access.CheckRole())
+{
+	@Html.ActionLink("Редактировать", "Edit", new {id = Model.Id})
+}
+
+@if (Access.CheckRole("Task.Deleter"))
+{
+	<div align="right">@Html.ActionLink("Удалить", "Delete", new {id = Model.Id})</div>
+}
+

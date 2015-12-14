@@ -1,0 +1,80 @@
+﻿@using IS.Model.Item.Discipline;
+@using IS.Mvc.Models
+@model DisciplineItem
+
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+	table {
+		width: 100%; /* Ширина таблицы */
+		border: 4px double black; /* Рамка вокруг таблицы */
+		border-collapse: collapse; /* Отображать только одинарные линии */
+	}
+
+	th {
+		text-align: left; /* Выравнивание по левому краю */
+		background: #ccc; /* Цвет фона ячеек */
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	td {
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	textarea {
+		width: 99%; /* Ширина поля в процентах */
+		height: 200px; /* Высота поля в пикселах */
+	}
+
+	.t_head {
+		background: #cccccc;
+		width: 100px;
+		font-weight: bolder;
+	}
+</style>
+
+<h2>Задача(@Html.ActionLink("К списку дисциплин", "List"))</h2>
+
+<table>
+	<tr>
+		<td class="t_head">
+			Короткое название
+		</td>
+		<td>
+			@Html.DisplayTextFor(m => Model.ShortName)
+		</td>
+	</tr>
+	<tr>
+		<td class="t_head">
+			Полное название
+		</td>
+		<td>
+			@Html.DisplayTextFor(m => Model.FullName)
+		</td>
+	</tr>
+	<tr>
+		<td class="t_head">
+			Описание
+		</td>
+		<td>
+			@Html.TextAreaFor(m => Model.Mem)
+		</td>
+	</tr>
+</table>
+<div align="left" style="float: left">
+	@if (Access.CheckRole("Discipline.Editor"))
+			{
+		@Html.ActionLink("Редактировать", "Edit", new { id = Model.Id })
+	}
+</div>
+<div align="right">
+	@if (Access.CheckRole("Discipline.Deleter"))
+			{
+		@Html.ActionLink("Удалить", "Delete", new { id = Model.Id })
+	}
+</div>

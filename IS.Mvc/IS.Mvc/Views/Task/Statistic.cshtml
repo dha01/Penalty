@@ -1,0 +1,45 @@
+﻿@model Dictionary<string, int>
+
+@{
+	ViewBag.Title = "Statistic";
+	int task_total = 15;
+	int i = 0;
+}
+
+<h2>Задача(@Html.ActionLink("К списку задач", "List"))</h2>
+
+<h2>Прогресс по выполнению задач с учетом назначенных но ещё не сданных</h2>
+<table border="1" style="width: 100%">
+	<thead>
+		<tr>
+			<th rowspan="2" style="width: 20px">№</th>
+			<th rowspan="2" style="width: 200px">Студент</th>
+			<th colspan="2">Оценка на экзамене</th>
+			<th rowspan="2">Прогресс</th>
+		</tr>
+		<tr>
+			<th style="width: 100px">Min</th>
+			<th style="width: 100px">Max</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.OrderByDescending(x => x.Value))
+		{
+			double min = (double) item.Value / task_total * 5 - 4;
+			double max = (double) item.Value / task_total * 5;
+			i++;
+			<tr style="background-color: @(item.Value <= 1 ? "#e9967a" : item.Value < 12 ? "#ffff00" : "#32cd32")">
+				<td>@i</td>
+				<td>@Html.Raw(item.Key)</td>
+				<td>@(Math.Max(2, Math.Round(min))) (@Math.Round(min, 2))</td>
+				<td>@(Math.Max(item.Value <= 1 ? 2 : 3, Math.Round(max))) (@Math.Round(max, 2))</td>
+				<td>
+					<progress max="@task_total" value="@item.Value" style="width: 100%; height: 15px;">
+						<span id="value">item.Value</span>%
+					</progress>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+

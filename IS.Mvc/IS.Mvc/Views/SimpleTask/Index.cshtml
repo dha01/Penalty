@@ -1,0 +1,76 @@
+﻿@using IS.Model.Item.Task
+@model List<TaskItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+	table {
+		width: 100%; /* Ширина таблицы */
+		/*border: 4px double black; /* Рамка вокруг таблицы */
+		border-collapse: collapse; /* Отображать только одинарные линии */
+	}
+
+	th {
+		text-align: left; /* Выравнивание по левому краю */
+		background: #ccc; /* Цвет фона ячеек */
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	td {
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+</style>
+
+@Html.ActionLink("Правила", "Rules", "SimpleTask", null, new { style = "font-size: 20pt" })
+
+<h2>Список задач</h2>
+
+@if (Model != null)
+{
+	<table>
+		<thead>
+			<tr>
+				<td>Id</td>
+				<td>Номер задачи</td>
+				<td>Название</td>
+				<td>Описание</td>
+				<td>Исполнитель</td>
+				<td>Сложность</td>
+				<td>Статус</td>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@item.Id</td>
+					<td>@Html.Raw(item.TaskType + "." + item.TaskNum)</td>
+					<td>@item.Header</td>
+					<td>
+						<div>@Html.Raw(item.Mem.Replace("\n", "<br />"))</div>
+					</td>
+					<td>@item.Executor</td>
+					<td>@item.Difficult</td>
+					<td>
+						@if (item.Complite)
+						{
+							@Html.Raw("Выполнена")
+						}
+						else if (string.IsNullOrEmpty(item.Executor))
+						{
+							@Html.Raw("Ожидает назначения")
+						}
+						else
+						{
+							@Html.Raw("Исполняется")
+						}
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}

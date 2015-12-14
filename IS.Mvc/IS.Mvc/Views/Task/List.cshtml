@@ -1,0 +1,210 @@
+﻿@using IS.Model.Item.Task;
+@using IS.Mvc.Models
+@model List<TaskItem> 
+
+@{
+	ViewBag.Title = "List";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+	table {
+		width: 100%; /* Ширина таблицы */
+		border: 4px double black; /* Рамка вокруг таблицы */
+		border-collapse: collapse; /* Отображать только одинарные линии */
+	}
+
+	th {
+		text-align: left; /* Выравнивание по левому краю */
+		background: #ccc; /* Цвет фона ячеек */
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	td {
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	table.dataTable.display tbody tr.deadline.odd,
+	table.dataTable.display tbody tr.deadline.even {
+		background-color: #ffa500;
+	}
+
+	table.dataTable.display tbody tr.double_deadline.odd,
+	table.dataTable.display tbody tr.double_deadline.even {
+		background-color: #fa8072;
+	}
+</style>
+
+<link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/DataTable/jquery.dataTables.css")">
+<script src="@Url.Content("~/Scripts/jquery-1.8.2.min.js")"></script>
+<script src="@Url.Content("~/Scripts/DataTable/jquery.dataTables.min.js")"></script>
+<script>
+	$(function() {
+		$("#tasks").dataTable({
+			"lengthMenu": [[50, 100, -1], [50, 100, "All"]]
+		});
+		$("#example").dataTable({
+			"lengthMenu": [[50, 100, -1], [50, 100, "All"]]
+		});
+	})
+</script>
+
+<br/>
+
+@Html.ActionLink("Загрузка файлов", "Index", "File")
+
+<h2>Список задач</h2>
+
+@Html.ActionLink("Перейти к личному прогрессу", "Progress", "Task", null, new { style = "font-size: 20pt" })
+
+@if (Access.CheckRole())
+{
+	<h2>@Html.ActionLink("Создать", "New")</h2>
+}
+
+@{
+	TimeSpan end = (TimeSpan)(new DateTime(2015, 12, 24, 12, 00, 00) - DateTime.Now);
+	int sec = Convert.ToInt32(end.TotalSeconds);
+	int day = 108 - Convert.ToInt32(end.TotalDays);
+}
+
+<div>
+	<span>До конца последнего занятия осталось:&nbsp;</span><span class="afss_day_bv">0</span> д.
+	<span class="afss_hours_bv">00</span>&nbsp;час.&nbsp;
+	<span class="afss_mins_bv">00</span>&nbsp;мин.&nbsp;
+	<span class="afss_secs_bv">00&nbsp;</span>&nbsp;сек.
+</div>
+
+<progress max="108" value="@day" style="width: 100%; height: 40px;">
+	<span id="value">25</span>%
+</progress>
+
+
+<script type="text/javascript">
+//<![CDATA[
+	var remain_bv = @sec;
+	function parseTime_bv(timestamp) {
+		if (timestamp < 0) timestamp = 0;
+
+		var day = Math.floor((timestamp / 60 / 60) / 24);
+		var hour = Math.floor(timestamp / 60 / 60);
+		var mins = Math.floor((timestamp - hour * 60 * 60) / 60);
+		var secs = Math.floor(timestamp - hour * 60 * 60 - mins * 60);
+		var left_hour = Math.floor((timestamp - day * 24 * 60 * 60) / 60 / 60);
+
+		$('span.afss_day_bv').text(day);
+		$('span.afss_hours_bv').text(left_hour);
+
+		if (String(mins).length > 1)
+			$('span.afss_mins_bv').text(mins);
+		else
+			$('span.afss_mins_bv').text("0" + mins);
+		if (String(secs).length > 1)
+			$('span.afss_secs_bv').text(secs);
+		else
+			$('span.afss_secs_bv').text("0" + secs);
+
+	}
+
+	$(document).ready(function () {
+		setInterval(function () {
+			remain_bv = remain_bv - 1;
+			parseTime_bv(remain_bv);
+			if (remain_bv <= 0) {
+				alert('Hello');
+			}
+		}, 1000);
+	});
+	//]]>
+</script>
+
+<table id="tasks" class="display cell-border compact hover order-column row-border">
+	<thead>
+		<tr>
+			<th>Заголовок</th>
+			<th>Pull Request</th>
+			<th>Дата создания</th>
+			<th>Срок</th>
+			<th>Срок в днях</th>
+			<th>Исполнитель</th>
+			<th>Статус</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var task in Model)
+		{
+			string row_class = "";
+			if (!task.IsPerform && task.Deadline < DateTime.Now)
+			{
+				if (task.Deadline < DateTime.Now.AddDays(-7))
+				{
+					row_class = "double_deadline";
+				}
+				else
+				{
+					row_class = "deadline";
+				}
+			}
+
+			<tr class="@row_class">
+				<td>@Html.ActionLink(string.Format("{0}_{1} {2}", task.Prefix, task.Number, task.Header), "Index", new { id = task.Id })</td>
+				<td>
+					@if (!string.IsNullOrEmpty(task.PullRequestUrl) && task.PullRequestUrl.Contains("//github.com"))
+					{
+						<a href="@task.PullRequestUrl">@task.PullRequestUrl.Split('/').Last()</a>
+					}
+					else
+					{
+						<a href="@task.PullRequestUrl">@task.PullRequestUrl</a>
+					}
+				</td>
+				<td>@Html.DisplayTextFor(m => task.Created)</td>
+				<td>@Html.DisplayTextFor(m => task.Deadline)</td>
+				<td>
+					@if (task.IsOpen && task.Deadline.HasValue)
+					{
+						TimeSpan diff = (TimeSpan)(task.Deadline - DateTime.Now);
+						if (diff.Days > 0)
+						{
+							@Html.Raw(string.Format("Осталось дней: {0}", diff.Days));
+						}
+						else
+						{
+							@Html.Raw(string.Format("Просрочено дней: {0}", -diff.Days));
+						}
+					}
+				</td>
+				<td>@Html.DisplayTextFor(m => task.Performer)</td>
+				@if (task.IsPerform)
+				{
+					<td colspan="2" style="background-color: #32cd32">
+						Выполнена
+					</td>
+				}
+				else
+				{
+					if (string.IsNullOrEmpty(task.Performer))
+					{
+						<td style="background-color: #c0c0c0">
+							Не назначена
+						</td>
+					}
+					else if (task.IsOpen)
+					{
+						<td style="background-color: #cccccc">
+							В процессе выполнения
+						</td>
+					}
+					else
+					{
+						<td style="background-color: #ffd700">
+							Ожидает проверки
+						</td>
+					}
+				}
+			</tr>
+		}
+	</tbody>
+</table>

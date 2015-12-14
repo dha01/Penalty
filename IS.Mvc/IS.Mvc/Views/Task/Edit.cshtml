@@ -1,0 +1,125 @@
+﻿@using IS.Model.Item.Task;
+@using IS.Mvc.Models
+@model TaskItem 
+
+@{
+	ViewBag.Title = "Edit";
+}
+
+<style>
+	table {
+		width: 100%; /* Ширина таблицы */
+		border: 4px double black; /* Рамка вокруг таблицы */
+		border-collapse: collapse; /* Отображать только одинарные линии */
+	}
+
+	th {
+		text-align: left; /* Выравнивание по левому краю */
+		background: #ccc; /* Цвет фона ячеек */
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	td {
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	textarea {
+		width: 99%; /* Ширина поля в процентах */
+		height: 200px; /* Высота поля в пикселах */
+	} 
+</style>
+
+<h2>Редактирование задачи</h2>
+
+@using (@Html.BeginForm("Update", "Task"))
+{
+	@Html.HiddenFor(m => Model.Id)
+	@Html.HiddenFor(m => Model.IsOpen)
+	@Html.HiddenFor(m => Model.Number)
+	@Html.HiddenFor(m => Model.Prefix)
+	@Html.HiddenFor(m => Model.Author)
+	@Html.HiddenFor(m => Model.IsPerform)
+	<table>
+		@if (Access.CheckRole("Task.Updater.Header"))
+		{
+			<tr>
+				<th style="width: 100px">
+					Заголовок
+				</th>
+				<td>
+					<input type="text" name="Header" value="@Model.Header" style="width: 100%;">
+				</td>
+			</tr>
+		}
+		@if (Access.CheckRole("Task.Updater.Priority"))
+		{
+			<tr>
+				<th>
+					Приоритет
+				</th>
+				<td>
+					@Html.EditorFor(m => Model.Priority)
+				</td>
+			</tr>
+		}
+		@if (Access.CheckRole("Task.Updater.Difficult"))
+		{
+			<tr>
+				<th>
+					Сложность
+				</th>
+				<td>
+					@Html.EditorFor(m => Model.Difficult)
+				</td>
+			</tr>
+		}
+		@if (Access.CheckRole("Task.Updater.Deadline"))
+		{
+			<tr>
+				<th>
+					Срок
+				</th>
+				<td>
+					@Html.EditorFor(m => Model.Deadline)
+				</td>
+			</tr>
+		}
+		@if (Access.CheckRole("Task.Updater.Mem"))
+		{
+			<tr>
+				<th>
+					Описание
+				</th>
+				<td>
+					@Html.TextAreaFor(m => Model.Mem)
+				</td>
+			</tr>
+		}
+		@if (Access.CheckRole("Task.Updater.Performer"))
+		{
+			<tr>
+				<th>
+					Исполнитель
+				</th>
+				<td>
+					@Html.EditorFor(m => Model.Performer)
+				</td>
+			</tr>
+		}
+		@if (Access.CheckRole())
+		{
+			<tr>
+				<th>
+					Пул реквест
+				</th>
+				<td>
+					@Html.EditorFor(m => Model.PullRequestUrl)
+				</td>
+			</tr>
+		}
+	</table>
+	<input type="submit" value="Сохранить"/>
+	@Html.ActionLink("Отмена", "Index", new { id = Model.Id })
+}

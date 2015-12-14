@@ -1,0 +1,65 @@
+﻿@using IS.Model.Item.Access;
+@using IS.Mvc.Models
+@model List<RoleItem>
+
+	@{
+		ViewBag.Title = "Role List";
+		Layout = "~/Views/Shared/_Layout.cshtml";
+	}
+
+	<style>
+		table {
+			width: 100%; /* Ширина таблицы */
+			border: 4px double black; /* Рамка вокруг таблицы */
+			border-collapse: collapse; /* Отображать только одинарные линии */
+		}
+
+		th {
+			text-align: left; /* Выравнивание по левому краю */
+			background: #ccc; /* Цвет фона ячеек */
+			padding: 5px; /* Поля вокруг содержимого ячеек */
+			border: 1px solid black; /* Граница вокруг ячеек */
+		}
+
+		td {
+			padding: 5px; /* Поля вокруг содержимого ячеек */
+			border: 1px solid black; /* Граница вокруг ячеек */
+		}
+	</style>
+
+	<h2>Список ролей</h2>
+
+	<table id="role">
+		<thead>
+			<tr>
+				<th>Код</th>
+				<th>Описание</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var role in Model)
+			{
+				<tr>
+					<td>@role.Code</td>
+					<td>@role.Mem</td>
+					<td>@Html.ActionLink("Просмотр", "Index", new { id = role.Id });</td>
+					@if (Access.CheckRole("Role.Updater"))
+					{
+						<td>
+							@Html.ActionLink("Редактировать", "Edit", new { id = role.Id })
+						</td>
+					}
+					@if (Access.CheckRole("Role.Deleter"))
+					{
+						<td>
+							@Html.ActionLink("Удалить", "Delete", new { id = role.Id }, new { onclick = "return confirm('Удалить запись?')" })
+						</td>
+					}
+				</tr>
+			}
+		</tbody>
+	</table>
+	@if (Access.CheckRole("Role.Creator"))
+	{
+		@Html.ActionLink("Создать новую роль", "New");
+	}

@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D0B23DA2-5C5E-446C-B65E-A66A29A4B5C9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IS.Model</RootNamespace>
+    <AssemblyName>IS.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helper\SqlHelper.cs" />
+    <Compile Include="Item\Access\RoleItem.cs" />
+    <Compile Include="Item\Access\UserItem.cs" />
+    <Compile Include="Item\Auditory\AuditoryItem.cs" />
+    <Compile Include="Item\Comment\CommentItem.cs" />
+    <Compile Include="Item\Calendar\SemesterItem.cs" />
+    <Compile Include="Item\Contact\ContactItem.cs" />
+    <Compile Include="Item\Discipline\DisciplineItem.cs" />
+    <Compile Include="Item\Person\PersonItem.cs" />
+    <Compile Include="Item\Role.cs" />
+    <Compile Include="Item\Specialty\PlanItem.cs" />
+    <Compile Include="Item\Specialty\SpecialtyDetailItem.cs" />
+    <Compile Include="Item\Specialty\SpecialtyItem.cs" />
+    <Compile Include="Item\Person\StudentItem.cs" />
+    <Compile Include="Item\Task\TaskItem.cs" />
+    <Compile Include="Item\Faculty\FacultyItem.cs" />
+    <Compile Include="Item\Team\TeamItem.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Access\IRoleRepository.cs" />
+    <Compile Include="Repository\Comment\CommentRepository.cs" />
+    <Compile Include="Repository\Comment\ICommentRepository.cs" />
+    <Compile Include="Repository\Calendar\ISemesterRepository.cs" />
+    <Compile Include="Repository\Calendar\SemesterRepository.cs" />
+    <Compile Include="Repository\Contact\ContactRepository.cs" />
+    <Compile Include="Repository\Contact\IContactRepository.cs" />
+    <Compile Include="Item\Cathedra\CathedraItem.cs" />
+    <Compile Include="Repository\Cathedra\CathedraRepository.cs" />
+    <Compile Include="Repository\Discipline\IDisciplineRepository.cs" />
+    <Compile Include="Repository\Discipline\DisciplineRepository.cs" />
+    <Compile Include="Repository\Cathedra\ICathedraRepository.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Item\Housing\HousingItem.cs" />
+    <Compile Include="Repository\Housing\HousingRepository.cs" />
+    <Compile Include="Repository\Housing\IHousingRepository.cs" />
+    <Compile Include="Repository\Person\IStudentRepository.cs" />
+    <Compile Include="Repository\Person\StudentRepository.cs" />
+    <Compile Include="Repository\Specialty\IPlanRepository.cs" />
+    <Compile Include="Repository\Specialty\ISpecialtyDetailRepository.cs" />
+    <Compile Include="Repository\Specialty\PlanRepository.cs" />
+    <Compile Include="Repository\Specialty\SpecialtyDetailRepository.cs" />
+    <Compile Include="Repository\Task\ITaskRepository.cs" />
+    <Compile Include="Repository\Access\IUserRepository.cs" />
+    <Compile Include="Repository\Access\RoleRepository.cs" />
+    <Compile Include="Repository\Auditory\AuditoryRepository.cs" />
+    <Compile Include="Repository\Auditory\IAuditoryRepository.cs" />
+    <Compile Include="Repository\Faculty\IFacultyRepository.cs" />
+    <Compile Include="Repository\Person\IPersonRepository.cs" />
+    <Compile Include="Repository\Person\PersonRepository.cs" />
+    <Compile Include="Repository\Specialty\ISpecialtyRepository.cs" />
+    <Compile Include="Repository\Specialty\SpecialtyRepository.cs" />
+    <Compile Include="Repository\Task\TaskRepository.cs" />
+    <Compile Include="Repository\Access\UserRepository.cs" />
+    <Compile Include="Repository\Faculty\FacultyRepository.cs" />
+    <Compile Include="Repository\Team\ITeamRepository.cs" />
+    <Compile Include="Repository\Team\TeamRepository.cs" />
+    <Compile Include="Service\CathedraService.cs" />
+    <Compile Include="Service\CommentService.cs" />
+    <Compile Include="Service\ContactService.cs" />
+    <Compile Include="Service\FacultyService.cs" />
+    <Compile Include="Service\HousingService.cs" />
+    <Compile Include="Service\PersonService.cs" />
+    <Compile Include="Service\DisciplineService.cs" />
+    <Compile Include="Service\RoleService.cs" />
+    <Compile Include="Service\SpecialtyDetailService.cs" />
+    <Compile Include="Service\TaskService.cs" />
+    <Compile Include="Service\TeamService.cs" />
+    <Compile Include="Service\UserService.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

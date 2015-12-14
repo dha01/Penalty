@@ -1,0 +1,50 @@
+﻿@using IS.Model.Item.Person;
+@using IS.Mvc.Models
+@model PersonItem
+
+@{
+	ViewBag.Title = "Index";
+}
+
+<style>
+	table {
+		border: 4px double black; /* Рамка вокруг таблицы */
+		border-collapse: collapse; /* Отображать только одинарные линии */
+	}
+
+	td:first-child {
+		text-align: left; /* Выравнивание по левому краю */
+		background: #ccc; /* Цвет фона ячеек */
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	td {
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+</style>
+
+<table class="table person">
+	<tr>
+		<td>Фамилия</td>
+		<td>@Model.LastName</td>
+	</tr>
+	<tr>
+		<td>Имя</td>
+		<td>@Model.FirstName</td>
+	</tr>
+	<tr>
+		<td>Отчество</td>
+		<td>@Model.FatherName</td>
+	</tr>
+	<tr>
+		<td>День Рождения</td>
+		<td>@Model.Birthday</td>
+	</tr>
+</table>
+@Html.ActionLink("Просмотр списка людей", "List")<br/>
+@if (Access.CheckRole("Person.Updater"))
+{
+	@Html.ActionLink("Редактировать", "Edit", new { id = Model.Id })
+}

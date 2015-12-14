@@ -1,0 +1,48 @@
+﻿@using IS.Model.Item.Access;
+@using IS.Model.Item.Team;
+@model TeamItem
+
+@{
+	ViewBag.Title = "Edit";
+}
+
+<style>
+	table {
+		border: 4px double black; /* Рамка вокруг таблицы */
+		border-collapse: collapse; /* Отображать только одинарные линии */
+	}
+
+	td:first-child {
+		text-align: left; /* Выравнивание по левому краю */
+		background: #ccc; /* Цвет фона ячеек */
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	td {
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+</style>
+
+<h2>Редактироание данных группы</h2>
+
+@using (@Html.BeginForm("Update", "Team"))
+{
+	@Html.HiddenFor(m => Model.Id)
+
+	<table class="table team">
+		<tr>
+			<td>Название</td>
+			<td><input type="text" name="Name" /></td>
+		</tr>
+		<tr>
+			<td>Дата создания</td>
+			<td><input type="text" name="CreateDate" /></td>
+		</tr>
+	</table>
+	<input type="submit" value="Сохранить" /><br />
+	@Html.ActionLink("Просмотр записи о группе", "Index", new { id = Model.Id })<br />
+	@Html.ActionLink("Отмена", "Index", new { id = Model.Id })
+}
+@Html.ActionLink("Просмотр списка групп", "List")

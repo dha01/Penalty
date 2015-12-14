@@ -1,0 +1,91 @@
+﻿@using IS.Model.Item.Discipline;
+@using IS.Mvc.Models
+@model List<DisciplineItem> 
+
+@{
+	ViewBag.Title = "List";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+	<html>
+	<head>
+		<meta name="viewport" content="width=device-width"/>
+		<title>Список дисциплин</title>
+		<style>
+			.creator {
+				background: #e6e6fa;
+				color: #00ced1;
+				font-size: 22px;
+				padding: 10px;
+				margin-top: 30px;
+				text-decoration: none;
+				width: 40%;
+				display: block;
+				border-radius: 5px;
+			}
+
+			h1 {
+				background: #e6e6fa;
+			}
+			 a {text-decoration: none;
+					  color: #00ced1;    
+			 }
+			 a:link,
+			 a:active,
+			 a:visited  {text-decoration: none;}
+			 a:hover {color: #008080;}
+			 td {
+				 border: 1px solid #2f4f4f;
+				 padding: 0 15px;
+			 }
+			 table {
+				 border-collapse: collapse;
+			 }
+
+			 thead {
+				 background: #b0c4de;
+			 }
+		</style>
+	</head>
+	<body>
+	<h1 align="center">Список дисциплин</h1>
+	<div align="center">
+		<table>
+			<thead>
+			<tr>
+				<th>Краткое название</th>
+				<th>Полное название</th>
+				<th colspan="3">Операции</th>
+			</tr>
+			</thead>
+			<tbody>
+			@foreach (var discipline in Model)
+			{
+				<tr>
+					<td>@Html.DisplayTextFor(m => discipline.ShortName)</td>
+					<td>@Html.DisplayTextFor(m => discipline.FullName)</td>
+					<td>@Html.ActionLink("Просмотр", "Index", new {id = discipline.Id})</td>
+					<td align="right">
+						@if (Access.CheckRole("Discipline.Updater"))
+						{
+							@Html.ActionLink("Редактировать", "Edit", new {id = discipline.Id})
+						}
+					</td>
+					@if (Access.CheckRole("Discipline.Deleter"))
+					{
+						<td align="right">
+							@Html.ActionLink("Удалить", "Delete", new {id = discipline.Id}, new {onclick = "return confirm('Удалить дисциплину?')"})
+						</td>
+					}
+				</tr>
+			}
+			</tbody>
+		</table>
+		<div align="center" class="creator">
+			@if (Access.CheckRole("Discipline.Creator"))
+			{
+				@Html.ActionLink("Создать дисциплину", "New")
+			}
+		</div>
+	</div>
+	</body>
+</html>

@@ -1,0 +1,22 @@
+﻿@using IS.Model.Item.Task
+@model TaskItem
+
+@{
+    Layout = null;
+}
+
+@{
+	int nnn = 18;
+}
+
+
+@using (Html.BeginForm("Index", "Test"))
+{
+	@Html.HiddenFor(m => Model.Id)
+	@Html.TextAreaFor(m => Model.Header, new {style = "font-size: 50pt"})
+	
+	@Html.ViewBag.Error
+	<input style="font-size: 50pt" type="text" value="@Model.Header" />
+
+	<input type="submit" value="Отправить"/>
+}

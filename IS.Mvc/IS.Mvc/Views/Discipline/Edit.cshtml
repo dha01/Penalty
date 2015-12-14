@@ -1,0 +1,66 @@
+﻿@using IS.Model.Item.Discipline;
+@model DisciplineItem 
+
+@{
+	ViewBag.Title = "Edit";
+}
+
+<style>
+	table {
+		width: 100%; /* Ширина таблицы */
+		border: 4px double black; /* Рамка вокруг таблицы */
+		border-collapse: collapse; /* Отображать только одинарные линии */
+	}
+
+	th {
+		text-align: left; /* Выравнивание по левому краю */
+		background: #ccc; /* Цвет фона ячеек */
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	td {
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	textarea {
+		width: 99%; /* Ширина поля в процентах */
+		height: 200px; /* Высота поля в пикселах */
+	} 
+</style>
+
+<h2>Редактирование дисциплины</h2>
+
+@using (@Html.BeginForm("Update", "Discipline"))
+{
+	@Html.HiddenFor(m => Model.Id)
+	<table>
+		<tr>
+			<th style="width: 100px">
+				Краткое название
+			</th>
+			<td>
+				<input type="text" name="ShortName" value="@Model.ShortName" style="width: 100%;">
+			</td>
+		</tr>
+		<tr>
+			<th style="width: 100px">
+				Полное название
+			</th>
+			<td>
+				<input type="text" name="FullName" value="@Model.FullName" style="width: 100%;">
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Описание
+			</th>
+			<td>
+				@Html.TextAreaFor(m => Model.Mem)
+			</td>
+		</tr>
+	</table>
+	<input type="submit" value="Сохранить"/>
+	@Html.ActionLink("Отмена", "Index", new { id = Model.Id })
+}

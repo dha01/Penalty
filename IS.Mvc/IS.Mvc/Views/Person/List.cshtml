@@ -1,0 +1,73 @@
+﻿@using IS.Model.Item.Person;
+@using IS.Mvc.Models
+@model List<PersonItem>
+
+@{
+	ViewBag.Title = "Person List";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+	table {
+		width: 100%; /* Ширина таблицы */
+		border: 4px double black; /* Рамка вокруг таблицы */
+		border-collapse: collapse; /* Отображать только одинарные линии */
+	}
+
+	th {
+		text-align: left; /* Выравнивание по левому краю */
+		background: #ccc; /* Цвет фона ячеек */
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	td {
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+</style>
+
+<h2>Список людей</h2>
+
+<table id="person">
+	<thead>
+	<tr>
+		<th>Фамилия</th>
+		<th>Имя</th>
+		<th>Отчество</th>
+		@if (Access.CheckRole("Person.Updater"))
+		{
+			<th></th>
+			<th></th>
+			<th></th>
+		}
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var person in Model)
+	{
+		<tr>
+			<td>@person.LastName</td>
+			<td>@person.FirstName</td>
+			<td>@person.FatherName</td>
+			<td>@Html.ActionLink("Просмотр", "Index", new { id = person.Id });</td>
+			@if (Access.CheckRole("Person.Updater"))
+				{
+				<td>
+					@Html.ActionLink("Редактировать", "Edit", new { id = person.Id })
+				</td>
+				}
+			@if (Access.CheckRole("Person.Deleter"))
+				{
+				<td>
+					@Html.ActionLink("Удалить", "Delete", new { id = person.Id }, new { onclick = "return confirm('Удалить запись?')" })
+				</td>
+				}
+		</tr>
+	}
+	</tbody>
+</table>
+@if (Access.CheckRole("Person.Creator"))
+{
+	@Html.ActionLink("Создать запись о человеке", "New");
+}

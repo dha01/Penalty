@@ -1,0 +1,45 @@
+﻿@model string
+
+@{
+    ViewBag.Title = "OnlineText";
+
+	var text = Model;
+}
+@Html.ActionLink("Список задач", "Index", "Task", null, new { style = "font-size: 20pt" })
+<br />
+<a href="https://github.com/dha01/">Репозиторий на github.com</a>
+<br />
+<a href="https://yadi.sk/d/ScKoXs0Ziubqy">Софт</a>
+<br />
+<a href="http://www.astron.kharkov.ua/dslpp/iris/files/xIRIS-git-win-public.pdf">Установка и настройка Git</a>
+<br />
+<a href="https://yadi.sk/i/exBfAJDDj3BRn">Книга про Git</a>
+<br />
+<a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D0%B0_%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F_%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D1%8F%D0%BC%D0%B8">Про системы контроля версий</a>
+<br/>
+<a href="http://professorweb.ru/">Тут достаточно много полезно информации с примерами по C#, JavaScript, JQuery и другому</a>
+<br/>
+<a href="http://www.flenov.info/books.php?id=10">Онлайн книга по Transact-SQL</a>
+<br/>
+<a href="https://yadi.sk/i/HKWj7kHXizmXX">Книга по С#</a>
+<br />
+<a>Если при попытке выполнить какую-либо операцию появилось сообщение об ошибке, касающейся ssl-сертификатов, попробуйте выполнить в Git Bash команду git config --global http.sslverify false;</a>
+<br />
+<div>Для того чтобы в контекстном меню Windows появилась строка выбора текущей ветки нужно выполнить следующие действия:</div>
+<br/>
+<div>1. <a href="https://yadi.sk/d/lWMIdz-uixHuB">скачать Git-1.9.4-preview20140815.exe</a> </div>
+<br />
+<div>2. При установке Git-1.9.4 на этапе Select Components выбрать Advanced context menu. </div>
+<br />
+<div>3. Скачать последнюю версию (2.5.1) Git.</div>
+<br />
+<div>4. При установке Git-2.5.1 на этапе Select Components убрать галку с Windows Explorer integration.</div>
+
+<h2>OnlineText</h2>
+
+@using (Html.BeginForm("Index"))
+{
+	@Html.TextAreaFor(m => text)
+	<input type="submit" value="Сохранить"/>
+}
+

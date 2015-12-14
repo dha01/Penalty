@@ -1,0 +1,43 @@
+﻿@using IS.Model.Item.Access;
+@using IS.Mvc.Models
+@using IS.Model.Item.Team;
+@model TeamItem
+
+@{
+	ViewBag.Title = "Index";
+}
+
+<style>
+	table {
+		border: 4px double black; /* Рамка вокруг таблицы */
+		border-collapse: collapse; /* Отображать только одинарные линии */
+	}
+
+	td:first-child {
+		text-align: left; /* Выравнивание по левому краю */
+		background: #ccc; /* Цвет фона ячеек */
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	td {
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+</style>
+
+<table class="table team">
+	<tr>
+		<td>Название</td>
+		<td>@Model.Name</td>
+	</tr>
+	<tr>
+		<td>Дата создания</td>
+		<td>@Model.CreateDate</td>
+	</tr>
+</table>
+@Html.ActionLink("Просмотр списка групп", "List")<br />
+@if (Access.CheckRole("Team.Updater"))
+{
+	@Html.ActionLink("Редактировать", "Edit", new { id = Model.Id })
+}
