@@ -1,0 +1,73 @@
+﻿@using IS.Model.Item.Car;
+@using IS.Mvc.Models
+@model List<CarItem>
+
+@{
+	ViewBag.Title = "Car List";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+	table {
+		width: 100%; /* Ширина таблицы */
+		border: 4px double black; /* Рамка вокруг таблицы */
+		border-collapse: collapse; /* Отображать только одинарные линии */
+	}
+
+	th {
+		text-align: left; /* Выравнивание по левому краю */
+		background: #ccc; /* Цвет фона ячеек */
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	td {
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+</style>
+
+<h2>Список автомобилей</h2>
+
+<table id="role">
+	<thead>
+		<tr>
+			<th>Дата выпуска</th>
+			<th>Марка</th>
+			<th>Описание</th>
+			<th>Заводской номер</th>
+			<th>Цена</th>
+			<th>Цвет</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var car in Model)
+		{
+			<tr>
+				<td>@car.ReleaseDate</td>
+				<td>@car.Brand</td>
+				<td>@car.Mem</td>
+				<td>@car.Vin</td>
+				<td>@car.Price</td>
+				<td>@car.Color</td>
+				<td>@Html.ActionLink("Просмотр", "Index", new { id = car.Id });</td>
+				@if (Access.CheckRole("Car.Updater"))
+				{
+					<td>
+						@Html.ActionLink("Редактировать", "Edit", new { id = car.Id })
+					</td>
+				}
+				@if (Access.CheckRole("Car.Deleter"))
+				{
+					<td>
+						@Html.ActionLink("Удалить", "Delete", new { id = car.Id }, new { onclick = "return confirm('Удалить запись?')" })
+					</td>
+				}
+			</tr>
+		}
+	</tbody>
+</table>
+@if (Access.CheckRole("Car.Creator"))
+{
+	@Html.ActionLink("Добавить новый автомобиль", "New");
+}

@@ -131,6 +131,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccessController.cs" />
+    <Compile Include="Controllers\CarController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\DisciplineController.cs" />
     <Compile Include="Controllers\FileController.cs" />
@@ -300,6 +301,10 @@
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Contact\List.cshtml" />
     <Content Include="Views\Contact\New.cshtml" />
+    <Content Include="Views\Car\Index.cshtml" />
+    <Content Include="Views\Car\List.cshtml" />
+    <Content Include="Views\Car\New.cshtml" />
+    <Content Include="Views\Car\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,97 @@
+﻿@using IS.Model.Item.Car;
+@model CarItem
+
+@{
+	ViewBag.Title = "Edit";
+}
+
+<style>
+	table {
+		border: 4px double black; /* Рамка вокруг таблицы */
+		border-collapse: collapse; /* Отображать только одинарные линии */
+	}
+
+	td:first-child {
+		text-align: left; /* Выравнивание по левому краю */
+		background: #ccc; /* Цвет фона ячеек */
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	td {
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+</style>
+
+<h2>Редактироание автомобиля</h2>
+
+@using (@Html.BeginForm("Update", "Car"))
+{
+	@Html.HiddenFor(m => Model.Id)
+
+	<table class="table car">
+		<tr>
+			<td style="width: 100px">
+				Дата изготовления
+			</td>
+			<td>
+				<input type="text" name="ReleaseDate" value="@Model.ReleaseDate" />
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 100px">
+				Марка
+			</td>
+			<td>
+				<select name="Brand">
+					@foreach (string name in Enum.GetNames(typeof(CarBrand)))
+					{
+						<option value="@name">@name</option>
+					}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Сериный номер
+			</td>
+			<td>
+				<input type="text" name="Vin" value="@Model.Vin" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Цена
+			</td>
+			<td>
+				<input type="text" name="Price" value="@Model.Price" />
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 100px">
+				Цвет
+			</td>
+			<td>
+				<select name="Color">
+					@foreach (string name in Enum.GetNames(typeof(CarColor)))
+					{
+						<option value="@name">@name</option>
+					}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Описание
+			</td>
+			<td>
+				<textarea name="Mem">@Model.Mem</textarea>
+			</td>
+		</tr>
+	</table>
+	<input type="submit" value="Сохранить" /><br />
+	@Html.ActionLink("Просмотр записи автомобиля", "Index", new { id = Model.Id })<br />
+	@Html.ActionLink("Отмена", "Index", new { id = Model.Id })
+}
+@Html.ActionLink("Просмотр списка автомобилей", "List")
