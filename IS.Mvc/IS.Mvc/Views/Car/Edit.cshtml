@@ -47,7 +47,7 @@
 				<select name="Brand">
 					@foreach (string name in Enum.GetNames(typeof(CarBrand)))
 					{
-						if(name.Equals(Enum.GetName(typeof(CarBrand),Model.Brand)))
+						if(name.Equals(Enum.GetName(typeof(CarBrand), Model.Brand)))
 						{
 							<option value="@name" selected>@name</option>
 						}
