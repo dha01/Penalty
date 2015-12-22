@@ -1,0 +1,118 @@
+﻿@using IS.Model.Item.Details;
+@model DetailsItem
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<style>
+    table {
+        border: 4px double black; /* Рамка вокруг таблицы */
+        border-collapse: collapse; /* Отображать только одинарные линии */
+    }
+
+    td:first-child {
+        text-align: left; /* Выравнивание по левому краю */
+        background: #ccc; /* Цвет фона ячеек */
+        padding: 5px; /* Поля вокруг содержимого ячеек */
+        border: 1px solid black; /* Граница вокруг ячеек */
+    }
+
+    td {
+        padding: 5px; /* Поля вокруг содержимого ячеек */
+        border: 1px solid black; /* Граница вокруг ячеек */
+    }
+</style>
+
+<h2>Редактироание детали</h2>
+
+@using (@Html.BeginForm("Update", "Details"))
+{
+    @Html.HiddenFor(m => Model.Id)
+
+    <table class="table details">
+
+        <tr>
+            <td style="width: 100px">
+                Наименование
+            </td>
+            <td>
+                <input type="text" name="Name" value="@Model.Name" />
+            </td>
+        </tr>
+
+        <tr>
+            <td style="width: 100px">
+                Дата изготовления
+            </td>
+            <td>
+                <input type="text" name="ReleaseDate" value="@Model.ReleaseDate" />
+            </td>
+        </tr>
+
+        <tr>
+            <td style="width: 100px">
+                Ширина
+            </td>
+            <td>
+                <input type="text" name="Width" value="@Model.Width" />
+            </td>
+        </tr>
+
+        <tr>
+            <td style="width: 100px">
+                Высота
+            </td>
+            <td>
+                <input type="text" name="Height" value="@Model.Height" />
+            </td>
+        </tr>
+
+        <tr>
+            <td style="width: 100px">
+                Длина
+            </td>
+            <td>
+                <input type="text" name="Lenght" value="@Model.Lenght" />
+            </td>
+        </tr>
+
+        <tr>
+            <td style="width: 100px">
+                Марка
+            </td>
+
+        <tr>
+            <td style="width: 100px">
+                Материал
+            </td>
+            <td>
+                <select name="Material">
+                    @foreach (string name in Enum.GetNames(typeof(DetailsMaterial)))
+                    {
+                        if (name.Equals(Enum.GetName(typeof(DetailsMaterial), Model.Material)))
+                        {
+                            <option value="@name" selected>@name</option>
+                        }
+                        else
+                        {
+                            <option value="@name">@name</option>
+                        }
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Описание
+            </td>
+            <td>
+                <textarea name="Mem">@Model.Mem</textarea>
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="Сохранить" /><br />
+    @Html.ActionLink("Просмотр записи детали", "Index", new { id = Model.Id })<br />
+    @Html.ActionLink("Отмена", "Index", new { id = Model.Id })
+}
+@Html.ActionLink("Просмотр списка деталей", "List")

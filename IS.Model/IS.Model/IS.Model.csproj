@@ -47,6 +47,7 @@
     <Compile Include="Item\Comment\CommentItem.cs" />
     <Compile Include="Item\Calendar\SemesterItem.cs" />
     <Compile Include="Item\Contact\ContactItem.cs" />
+    <Compile Include="Item\Details\DetailsItem.cs" />
     <Compile Include="Item\Discipline\DisciplineItem.cs" />
     <Compile Include="Item\Person\PersonItem.cs" />
     <Compile Include="Item\Role.cs" />
@@ -67,6 +68,8 @@
     <Compile Include="Repository\Contact\IContactRepository.cs" />
     <Compile Include="Item\Cathedra\CathedraItem.cs" />
     <Compile Include="Repository\Cathedra\CathedraRepository.cs" />
+    <Compile Include="Repository\Details\DetailsRepository.cs" />
+    <Compile Include="Repository\Details\IDetailsRepository.cs" />
     <Compile Include="Repository\Discipline\IDisciplineRepository.cs" />
     <Compile Include="Repository\Discipline\DisciplineRepository.cs" />
     <Compile Include="Repository\Cathedra\ICathedraRepository.cs" />
@@ -98,6 +101,7 @@
     <Compile Include="Service\CathedraService.cs" />
     <Compile Include="Service\CommentService.cs" />
     <Compile Include="Service\ContactService.cs" />
+    <Compile Include="Service\DetailsService.cs" />
     <Compile Include="Service\FacultyService.cs" />
     <Compile Include="Service\HousingService.cs" />
     <Compile Include="Service\PersonService.cs" />
