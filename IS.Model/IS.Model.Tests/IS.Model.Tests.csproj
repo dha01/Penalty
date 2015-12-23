@@ -35,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+
     <Reference Include="Moq">
       <HintPath>..\..\..\External\Moq.4.0.10827\NET40\Moq.dll</HintPath>
     </Reference>
@@ -84,6 +85,7 @@
     <Compile Include="Service\UserServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="production.App.config" />
     <None Include="packages.config" />
   </ItemGroup>
