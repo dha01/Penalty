@@ -1,117 +1,117 @@
 ﻿@using IS.Model.Item.Details
 @model DetailsItem
 @{
-    ViewBag.Title = "Create";
+	ViewBag.Title = "Create";
 }
 
 <style>
-    table {
-        width: 100%; /* Ширина таблицы */
-        border: 4px double black; /* Рамка вокруг таблицы */
-        border-collapse: collapse; /* Отображать только одинарные линии */
-    }
+	table {
+		width: 100%; /* Ширина таблицы */
+		border: 4px double black; /* Рамка вокруг таблицы */
+		border-collapse: collapse; /* Отображать только одинарные линии */
+	}
 
-    th {
-        text-align: left; /* Выравнивание по левому краю */
-        background: #ccc; /* Цвет фона ячеек */
-        padding: 5px; /* Поля вокруг содержимого ячеек */
-        border: 1px solid black; /* Граница вокруг ячеек */
-    }
+	th {
+		text-align: left; /* Выравнивание по левому краю */
+		background: #ccc; /* Цвет фона ячеек */
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
 
-    td {
-        padding: 5px; /* Поля вокруг содержимого ячеек */
-        border: 1px solid black; /* Граница вокруг ячеек */
-    }
+	td {
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
 
-    textarea {
-        width: 99%; /* Ширина поля в процентах */
-        height: 200px; /* Высота поля в пикселах */
-    }
+	textarea {
+		width: 99%; /* Ширина поля в процентах */
+		height: 200px; /* Высота поля в пикселах */
+	}
 </style>
 
 <h2>Добавление детали</h2>
 
 @using (@Html.BeginForm("Create", "Details"))
 {
-    <table>
+	<table>
 
-        <tr>
-            <th style="width: 100%">
-                Наименование
-            </th>
-            <td>
-                <input type="text" name="Name" />
-            </td>
-        </tr>
+		<tr>
+			<th style="width: 100%">
+				Наименование
+			</th>
+			<td>
+				<input type="text" name="Name" />
+			</td>
+		</tr>
 
-        <tr>
-            <th style="width: 100px">
-                Дата изготовления
-            </th>
-            <td>
-                <input type="text" name="ReleaseDate" />
-            </td>
-        </tr>
+		<tr>
+			<th style="width: 100px">
+				Дата изготовления
+			</th>
+			<td>
+				<input type="text" name="ReleaseDate" />
+			</td>
+		</tr>
 
-        <tr>
-            <th style="width: 100px">
-                Ширина
-            </th>
-            <td>
-                <input type="text" name="Width" />
-            </td>
-        </tr>
+		<tr>
+			<th style="width: 100px">
+				Ширина
+			</th>
+			<td>
+				<input type="text" name="Width" />
+			</td>
+		</tr>
 
-        <tr>
-            <th style="width: 100px">
-                Высота
-            </th>
-            <td>
-                <input type="text" name="Height" />
-            </td>
-        </tr>
+		<tr>
+			<th style="width: 100px">
+				Высота
+			</th>
+			<td>
+				<input type="text" name="Height" />
+			</td>
+		</tr>
 
-        <tr>
-            <th style="width: 100px">
-                Длина
-            </th>
-            <td>
-                <input type="text" name="Lenght" />
-            </td>
-        </tr>
+		<tr>
+			<th style="width: 100px">
+				Длина
+			</th>
+			<td>
+				<input type="text" name="Lenght" />
+			</td>
+		</tr>
 
-        <tr>
-            <th style="width: 100px">
-                Масса
-            </th>
-            <td>
-                <input type="text" name="Mass" />
-            </td>
-        </tr>
-        
-        <tr>
-            <th style="width: 100px">
-                Материал
-            </th>
-            <td>
-                <select name="Material">
-                    @foreach (string name in Enum.GetNames(typeof(DetailsMaterial)))
-                    {
-                        <option value="@name">@name</option>
-                    }
-                </select>
-            </td>
-        </tr>
+		<tr>
+			<th style="width: 100px">
+				Масса
+			</th>
+			<td>
+				<input type="text" name="Mass" />
+			</td>
+		</tr>
+		
+		<tr>
+			<th style="width: 100px">
+				Материал
+			</th>
+			<td>
+				<select name="Material">
+					@foreach (string name in Enum.GetNames(typeof(DetailsMaterial)))
+					{
+						<option value="@name">@name</option>
+					}
+				</select>
+			</td>
+		</tr>
 
-        <tr>
-            <th>
-                Описание
-            </th>
-            <td>
-                <textarea name="Mem"></textarea>
-            </td>
-        </tr>
+		<tr>
+			<th>
+				Описание
+			</th>
+			<td>
+				<textarea name="Mem"></textarea>
+			</td>
+		</tr>
 
-    </table>
-    <input type="submit" value="Добавить" />
+	</table>
+	<input type="submit" value="Добавить" />
 }

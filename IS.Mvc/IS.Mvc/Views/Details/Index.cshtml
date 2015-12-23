@@ -3,60 +3,60 @@
 @model DetailsItem
 
 @{
-    ViewBag.Title = "Index";
+	ViewBag.Title = "Index";
 }
 
 <style>
-    table {
-        border: 4px double black; /* Рамка вокруг таблицы */
-        border-collapse: collapse; /* Отображать только одинарные линии */
-    }
+	table {
+		border: 4px double black; /* Рамка вокруг таблицы */
+		border-collapse: collapse; /* Отображать только одинарные линии */
+	}
 
-    td:first-child {
-        text-align: left; /* Выравнивание по левому краю */
-        background: #ccc; /* Цвет фона ячеек */
-        padding: 5px; /* Поля вокруг содержимого ячеек */
-        border: 1px solid black; /* Граница вокруг ячеек */
-    }
+	td:first-child {
+		text-align: left; /* Выравнивание по левому краю */
+		background: #ccc; /* Цвет фона ячеек */
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
 
-    td {
-        padding: 5px; /* Поля вокруг содержимого ячеек */
-        border: 1px solid black; /* Граница вокруг ячеек */
-    }
+	td {
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
 </style>
 
 <table class="table details">
-    <tr>
-        <td>Наименование</td>
-        <td>@Model.Name</td>
-    </tr>
-    <tr>
-        <td>Дата выпуска</td>
-        <td>@Model.ReleaseDate</td>
-    </tr>
-    <tr>
-        <td>Ширина</td>
-        <td>@Model.Width</td>
-    </tr>
-    <tr>
-        <td>Высота</td>
-        <td>@Model.Height</td>
-    </tr>
-    <tr>
-        <td>Длинна</td>
-        <td>@Model.Length</td>
-    </tr>
-    <tr>
-        <td>Масса</td>
-        <td>@Model.Mass</td>
-    </tr>
-    <tr>
-        <td>Материал</td>
-        <td>@Model.Material</td>
-    </tr>
+	<tr>
+		<td>Наименование</td>
+		<td>@Model.Name</td>
+	</tr>
+	<tr>
+		<td>Дата выпуска</td>
+		<td>@Model.ReleaseDate</td>
+	</tr>
+	<tr>
+		<td>Ширина</td>
+		<td>@Model.Width</td>
+	</tr>
+	<tr>
+		<td>Высота</td>
+		<td>@Model.Height</td>
+	</tr>
+	<tr>
+		<td>Длинна</td>
+		<td>@Model.Length</td>
+	</tr>
+	<tr>
+		<td>Масса</td>
+		<td>@Model.Mass</td>
+	</tr>
+	<tr>
+		<td>Материал</td>
+		<td>@Model.Material</td>
+	</tr>
 </table>
 @Html.ActionLink("Просмотр списка деталей", "List")<br />
 @if (Access.CheckRole("Details.Updater"))
 {
-    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id })
+	@Html.ActionLink("Редактировать", "Edit", new { id = Model.Id })
 }

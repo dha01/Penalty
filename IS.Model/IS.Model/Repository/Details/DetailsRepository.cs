@@ -4,70 +4,70 @@ using IS.Model.Item.Details;
 
 namespace IS.Model.Repository.Details
 {
-    /// <summary>
-    /// Репозиторий автомобилей.
-    /// </summary>
-    public class DetailsRepository : IDetailsRepository
-    {
-        /// <summary>
-        /// Получает деталь по идентификатору.
-        /// </summary>
-        /// <param name="id">Идентификатор.</param>
-        /// <returns>Деталь.</returns>
-        public DetailsItem Get(int id)
-        {
-            using (var sqlh = new SqlHelper())
-            {
-                return sqlh.ExecMapping<DetailsItem>(@"
+	/// <summary>
+	/// Репозиторий автомобилей.
+	/// </summary>
+	public class DetailsRepository : IDetailsRepository
+	{
+		/// <summary>
+		/// Получает деталь по идентификатору.
+		/// </summary>
+		/// <param name="id">Идентификатор.</param>
+		/// <returns>Деталь.</returns>
+		public DetailsItem Get(int id)
+		{
+			using (var sqlh = new SqlHelper())
+			{
+				return sqlh.ExecMapping<DetailsItem>(@"
 select
 	c.details Id,
 	c.name Name,
 	c.release_date ReleaseDate,
 	c.width Width,
 	c.height Height,
-	c.lenght Ltnght,
+	c.lenght Lenght,
 	c.mass Mass,
 	c.material Material
 from Details.details c
 where c.details = @id", new { id });
-            }
-        }
+			}
+		}
 
-        /// <summary>
-        /// Обновляет данные по детали.
-        /// </summary>
-        /// <param name="details">Деталь.</param>
-        public void Update(DetailsItem details)
-        {
-            using (var sqlh = new SqlHelper())
-            {
-                sqlh.ExecNoQuery(@"
+		/// <summary>
+		/// Обновляет данные по детали.
+		/// </summary>
+		/// <param name="details">Деталь.</param>
+		public void Update(DetailsItem details)
+		{
+			using (var sqlh = new SqlHelper())
+			{
+				sqlh.ExecNoQuery(@"
 update Details.details
 set
-    name = @Name,
+	name = @Name,
 	release_date = @ReleaseDate,
-    width = @Width,
-    height = @Height,
-    lenght = @Ltnght,
+	width = @Width,
+	height = @Height,
+	lenght = @Lenght,
 	mass = @Mass,
 	material = @Material
 where details = @Id", details);
-            }
-        }
+			}
+		}
 
-        /// <summary>
-        /// Создает новую деталь.
-        /// </summary>
-        /// <param name="details">Деталь.</param>
-        /// <returns>Идентификатор созданноной детали.</returns>
-        public int Create(DetailsItem details)
-        {
-            using (var sqlh = new SqlHelper())
-            {
-                return sqlh.ExecScalar<int>(@"
+		/// <summary>
+		/// Создает новую деталь.
+		/// </summary>
+		/// <param name="details">Деталь.</param>
+		/// <returns>Идентификатор созданноной детали.</returns>
+		public int Create(DetailsItem details)
+		{
+			using (var sqlh = new SqlHelper())
+			{
+				return sqlh.ExecScalar<int>(@"
 insert into Details.details
 (
-    name,
+	name,
 	release_date,
 	width,
 	height,
@@ -77,7 +77,7 @@ insert into Details.details
 )
 values
 (
-    @Name,
+	@Name,
 	@ReleaseDate,
 	@Width,
 	@Height,
@@ -86,43 +86,43 @@ values
 	@material
 )
 select scope_identity()", details);
-            }
-        }
+			}
+		}
 
-        /// <summary>
-        /// Удаляет деталь.
-        /// </summary>
-        /// <param name="id">Идентификатор.</param>
-        public void Delete(int id)
-        {
-            using (SqlHelper sqlh = new SqlHelper())
-            {
-                sqlh.ExecNoQuery(@"
+		/// <summary>
+		/// Удаляет деталь.
+		/// </summary>
+		/// <param name="id">Идентификатор.</param>
+		public void Delete(int id)
+		{
+			using (SqlHelper sqlh = new SqlHelper())
+			{
+				sqlh.ExecNoQuery(@"
 delete from Details.details
 where details = @id", new { id });
-            }
-        }
+			}
+		}
 
-        /// <summary>
-        /// Получает список всех деталей.
-        /// </summary>
-        /// <returns>Список деталей.</returns>
-        public List<DetailsItem> GetList()
-        {
-            using (var sqlh = new SqlHelper())
-            {
-                return sqlh.ExecMappingList<DetailsItem>(@"
+		/// <summary>
+		/// Получает список всех деталей.
+		/// </summary>
+		/// <returns>Список деталей.</returns>
+		public List<DetailsItem> GetList()
+		{
+			using (var sqlh = new SqlHelper())
+			{
+				return sqlh.ExecMappingList<DetailsItem>(@"
 select
-    c.details Id,
-    c.name Name,
+	c.details Id,
+	c.name Name,
 	c.release_date ReleaseDate,
 	c.width Width,
-    c.height Height,
-    c.lenght Ltnght,
+	c.height Height,
+	c.lenght Lenght,
 	c.mass Mass,
 	c.material Material
 from Details.details c");
-            }
-        }
-    }
+			}
+		}
+	}
 }
