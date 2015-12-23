@@ -1,0 +1,97 @@
+﻿@using IS.Model.Item.Product
+@model ProductItem
+@{
+	ViewBag.Title = "Create";
+}
+
+<style>
+	table {
+		width: 100%; /* Ширина таблицы */
+		border: 4px double black; /* Рамка вокруг таблицы */
+		border-collapse: collapse; /* Отображать только одинарные линии */
+	}
+
+	th {
+		text-align: left; /* Выравнивание по левому краю */
+		background: #ccc; /* Цвет фона ячеек */
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	td {
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	textarea {
+		width: 99%; /* Ширина поля в процентах */
+		height: 200px; /* Высота поля в пикселах */
+	}
+</style>
+
+<h2>Добавление продукта</h2>
+
+@using (@Html.BeginForm("Create", "Product"))
+{
+	<table>
+		<tr>
+			<th style="width: 100px">
+				Наименование
+			</th>
+			<td>
+				<input type="text" name="Name" />
+			</td>
+		</tr>
+		<tr>
+			<th style="width: 100px">
+				Срок годности
+			</th>
+			<td>
+				<input type="text" name="ExpirationDate" />
+			</td>
+		</tr>
+		<tr>
+			<th style="width: 100px">
+				Тип товара
+			</th>
+			<td>
+				<select name="ProductType">
+					@foreach (string name in Enum.GetNames(typeof(ProductType)))
+					{
+						<option value="@name">@name</option>
+					}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Номер полки
+			</th>
+			<td>
+				<input type="text" name="Position" />
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Цена
+			</th>
+			<td>
+				<input type="text" name="Price" />
+			</td>
+		</tr>
+		<tr>
+			<th style="width: 100px">
+				Единица измерения
+			</th>
+			<td>
+				<select name="Unit">
+					@foreach (string name in Enum.GetNames(typeof(ProductUnit)))
+					{
+						<option value="@name">@name</option>
+					}
+				</select>
+			</td>
+		</tr>
+	</table>
+	<input type="submit" value="Добавить" />
+}

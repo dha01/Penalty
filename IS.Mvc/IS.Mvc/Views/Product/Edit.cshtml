@@ -1,0 +1,111 @@
+﻿@using IS.Model.Item.Product;
+@model ProductItem
+
+@{
+	ViewBag.Title = "Edit";
+}
+
+<style>
+	table {
+		border: 4px double black; /* Рамка вокруг таблицы */
+		border-collapse: collapse; /* Отображать только одинарные линии */
+	}
+
+	td:first-child {
+		text-align: left; /* Выравнивание по левому краю */
+		background: #ccc; /* Цвет фона ячеек */
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	td {
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+</style>
+
+<h2>Редактироание продукт</h2>
+
+@using (@Html.BeginForm("Update", "Product"))
+{
+	@Html.HiddenFor(m => Model.Id)
+
+	<table class="table product">
+		<tr>
+			<td>
+				Название
+			</td>
+			<td>
+				<input type="text" name="Name" value="@Model.Name" />
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 100px">
+				Срок годности
+			</td>
+			<td>
+				<input type="text" name="ExpirationDate" value="@Model.ExpirationDate" />
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 100px">
+				Тип товара
+			</td>
+			<td>
+				<select name="ProductType">
+					@foreach (string name in Enum.GetNames(typeof(ProductType)))
+					{
+						if (name.Equals(Enum.GetName(typeof(ProductType), Model.ProductType)))
+						{
+							<option value="@name" selected>@name</option>
+						}
+						else
+						{
+							<option value="@name">@name</option>
+						}
+					}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Номер полки
+			</td>
+			<td>
+				<input type="text" name="Position" value="@Model.Position" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Цена
+			</td>
+			<td>
+				<input type="text" name="Price" value="@Model.Price" />
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 100px">
+				Единица измерения
+			</td>
+			<td>
+				<select name="Unit">
+					@foreach (string name in Enum.GetNames(typeof(ProductUnit)))
+					{
+						if (name.Equals(Enum.GetName(typeof(ProductUnit), Model.Unit)))
+						{
+							<option value="@name" selected>@name</option>
+						}
+						else
+						{
+							<option value="@name">@name</option>
+						}
+					}
+				</select>
+			</td>
+		</tr>
+	</table>
+	<input type="submit" value="Сохранить" /><br />
+	@Html.ActionLink("Просмотр записи продукта", "Index", new { id = Model.Id })<br />
+	@Html.ActionLink("Отмена", "Index", new { id = Model.Id })
+}
+@Html.ActionLink("Просмотр списка продукта", "List")

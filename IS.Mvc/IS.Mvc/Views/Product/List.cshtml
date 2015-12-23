@@ -1,0 +1,73 @@
+﻿@using IS.Model.Item.Product;
+@using IS.Mvc.Models
+@model List<ProductItem>
+
+@{
+	ViewBag.Title = "Product List";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+	table {
+		width: 100%; /* Ширина таблицы */
+		border: 4px double black; /* Рамка вокруг таблицы */
+		border-collapse: collapse; /* Отображать только одинарные линии */
+	}
+
+	th {
+		text-align: left; /* Выравнивание по левому краю */
+		background: #ccc; /* Цвет фона ячеек */
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	td {
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+</style>
+
+<h2>Список продуктов</h2>
+
+<table id="product">
+	<thead>
+		<tr>
+			<th>Наименование</th>
+			<th>Срок годности</th>
+			<th>Тип товара</th>
+			<th>Номер полки</th>
+			<th>Цена</th>
+			<th>Единица измерения</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var product in Model)
+		{
+			<tr>
+				<td>@product.Name</td>
+				<td>@product.ExpirationDate</td>
+				<td>@product.ProductType</td>
+				<td>@product.Position</td>
+				<td>@product.Price</td>
+				<td>@product.Unit</td>
+				<td>@Html.ActionLink("Просмотр", "Index", new { id = product.Id });</td>
+				@if (Access.CheckRole("Product.Updater"))
+				{
+					<td>
+						@Html.ActionLink("Редактировать", "Edit", new { id = product.Id })
+					</td>
+				}
+				@if (Access.CheckRole("Product.Deleter"))
+				{
+					<td>
+						@Html.ActionLink("Удалить", "Delete", new { id = product.Id }, new { onclick = "return confirm('Удалить запись?')" })
+					</td>
+				}
+			</tr>
+		}
+	</tbody>
+</table>
+@if (Access.CheckRole("Product.Creator"))
+{
+	@Html.ActionLink("Добавить новый продукт", "New");
+}
