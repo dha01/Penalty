@@ -25,18 +25,22 @@ namespace IS.Model.Item.Details
         /// <summary>
         /// Ширина.
         /// </summary>
-        public float Width { get; set; }
+        public int Width { get; set; }
 
         /// <summary>
         /// Высота.
         /// </summary>
-        public float Height { get; set; }
+        public int Height { get; set; }
 
         /// <summary>
         /// Длинна.
         /// </summary>
-        public float Lenght { get; set; }
+        public int Lenght { get; set; }
 
+		/// <summary>
+        /// Масса.
+        /// </summary>
+        public int Mass { get; set; }
 
         /// <summary>
         /// Идентификатор материала.
@@ -60,8 +64,8 @@ namespace IS.Model.Item.Details
         /// </summary>
         Wood,
         /// <summary>
-        /// Камень.
+        /// Стекло.
         /// </summary>
-        Stone
+        Glass
     }
 }

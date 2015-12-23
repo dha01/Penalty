@@ -21,11 +21,12 @@ namespace IS.Model.Repository.Details
                 return sqlh.ExecMapping<DetailsItem>(@"
 select
 	c.details Id,
-    c.name Name,
+	c.name Name,
 	c.release_date ReleaseDate,
 	c.width Width,
-    c.height Height,
-    c.lenght Ltnght,
+	c.height Height,
+	c.lenght Ltnght,
+	c.mass Mass,
 	c.material Material
 from Details.details c
 where c.details = @id", new { id });
@@ -48,6 +49,7 @@ set
     width = @Width,
     height = @Height,
     lenght = @Ltnght,
+	mass = @Mass,
 	material = @Material
 where details = @Id", details);
             }
@@ -65,12 +67,13 @@ where details = @Id", details);
                 return sqlh.ExecScalar<int>(@"
 insert into Details.details
 (
-    name
+    name,
 	release_date,
 	width,
 	height,
 	lenght,
-	mass
+	mass,
+	material
 )
 values
 (
@@ -79,7 +82,8 @@ values
 	@Width,
 	@Height,
 	@Lenght,
-	@Mass
+	@Mass,
+	@material
 )
 select scope_identity()", details);
             }
@@ -115,8 +119,8 @@ select
 	c.width Width,
     c.height Height,
     c.lenght Ltnght,
+	c.mass Mass,
 	c.material Material
-
 from Details.details c");
             }
         }

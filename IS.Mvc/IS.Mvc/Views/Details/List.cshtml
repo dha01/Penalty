@@ -1,5 +1,5 @@
 ﻿@using IS.Model.Item.Details;
-@using IS.Mvc.Models;
+@using IS.Mvc.Models
 @model List<DetailsItem>
 
 @{
@@ -50,8 +50,8 @@
                 <td>@details.Width</td>
                 <td>@details.Height</td>
                 <td>@details.Lenght</td>
+				<td>@details.Mass</td>
                 <td>@details.Material</td>
-                <td>@details.Mem</td>
                 <td>@Html.ActionLink("Просмотр", "Index", new { id = details.Id });</td>
                 @if (Access.CheckRole("Details.Updater"))
                 {

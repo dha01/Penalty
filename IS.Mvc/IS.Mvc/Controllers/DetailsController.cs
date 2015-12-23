@@ -14,11 +14,11 @@ namespace IS.Mvc.Controllers
     /// </summary>
     public class DetailsController : Controller
     {
-        private DetailsService _detailsServise;
+        private DetailsService _detailsService;
 
         public DetailsController()
         {
-            _detailsServise = new DetailsService();
+            _detailsService = new DetailsService();
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace IS.Mvc.Controllers
         {
             if (id.HasValue)
             {
-                return View("Index", _detailsServise.GetById(id.Value));
+                return View("Index", _detailsService.GetById(id.Value));
             }
             else
             {
@@ -44,7 +44,7 @@ namespace IS.Mvc.Controllers
         /// <returns></returns>
         public ActionResult List()
         {
-            return View("List", _detailsServise.GetList());
+            return View("List", _detailsService.GetList());
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace IS.Mvc.Controllers
         public ActionResult Create(DetailsItem details)
         {
             Access.CheckAccess("Details.Creator");
-            return RedirectToAction("Index", new { id = _detailsServise.Create(details) });
+            return RedirectToAction("Index", new { id = _detailsService.Create(details) });
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace IS.Mvc.Controllers
         public ActionResult Update(DetailsItem details)
         {
             Access.CheckAccess("Details.Updater");
-            _detailsServise.Update(details);
+            _detailsService.Update(details);
             return RedirectToAction("Index", new { id = details.Id });
         }
 
@@ -90,7 +90,7 @@ namespace IS.Mvc.Controllers
         /// <returns></returns>
         public ActionResult Edit(int id)
         {
-            return View(_detailsServise.GetById(id));
+            return View(_detailsService.GetById(id));
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace IS.Mvc.Controllers
         public ActionResult Delete(int id)
         {
             Access.CheckAccess("Details.Deleter");
-            _detailsServise.Delete(id);
+            _detailsService.Delete(id);
             return RedirectToAction("Index");
         }
     }

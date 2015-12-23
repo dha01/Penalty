@@ -4,11 +4,16 @@ create table Details.details
 	details int identity(1,1) not null,
 	name varchar(64) not null,
 	release_date date null,
-	width float,
-	height float,
-	lenght float,
-	mass float,
-	details_prefix int not null,
-	constraint PK__details primary key (details),
-	constraint FK__details__details_prefix foreign key (details_prefix) references Details.details_prefix
+	width int,
+	height int,
+	lenght int,
+	mass int,
+	material varchar(64) not null,
+	constraint PK__details primary key (details)
 )
+-- Добавляние записей в таблицу.
+insert into Details.details(name,release_date,width,height,lenght,material)
+	values
+			('detail1','2015-01-01', 1000, 1000, 1000, 500, 'Wood'),
+			('detail2','2015-04-01', 2000, 3000, 1000, 1500, 'Glass')
+

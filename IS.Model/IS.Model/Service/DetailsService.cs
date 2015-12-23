@@ -59,7 +59,7 @@ namespace IS.Model.Service
         /// <returns>Идентификатор созданной детали.</returns>
         public int Create(DetailsItem details)
         {
-            if (string.IsNullOrEmpty(details.Name))
+            if (string.IsNullOrEmpty(details.Mem))
             {
                 throw new Exception("Поле 'Mem' не должно быть пустым.");
             }
@@ -73,14 +73,14 @@ namespace IS.Model.Service
         /// <param name="details">Деталь.</param>
         public void Update(DetailsItem details)
         {
-            if (string.IsNullOrEmpty(details.Name))
+            if (string.IsNullOrEmpty(details.Mem))
             {
                 throw new Exception("Поле 'Mem' не должно быть пустым.");
             }
 
             if (GetById(details.Id) == null)
             {
-                throw new Exception("Деталь не найден.");
+                throw new Exception("Деталь не найдена.");
             }
 
             _detailsRepository.Update(details);
