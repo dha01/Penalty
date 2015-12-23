@@ -91,7 +91,7 @@
 				<select name="Unit">
 					@foreach (string name in Enum.GetNames(typeof(ProductUnit)))
 					{
-						if (name.Equals(Enum.GetName(typeof(ProductUnit), Model.Unit)))
+						if (name.Equals(Enum.GetName(typeof(ProductUnit), Model.ProductUnit)))
 						{
 							<option value="@name" selected>@name</option>
 						}

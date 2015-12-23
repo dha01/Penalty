@@ -68,7 +68,7 @@ namespace IS.Mvc.Controllers
 			var default_item = new ProductItem
 			{
 				ProductType = ProductType.Bread,
-				Unit = ProductUnit.Kilogram
+				ProductUnit = ProductUnit.Kilogram
 			};
 			return View(default_item);
 		}

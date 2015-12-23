@@ -30,7 +30,7 @@ namespace IS.Model.Item.Product
 		/// <summary>
 		/// Еденица измерения.
 		/// </summary>
-		public ProductUnit Unit { get; set; }
+		public ProductUnit ProductUnit { get; set; }
 
 		/// <summary>
 		/// Номер полки.

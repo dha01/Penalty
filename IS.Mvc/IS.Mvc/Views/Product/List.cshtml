@@ -49,7 +49,7 @@
 				<td>@product.ProductType</td>
 				<td>@product.Position</td>
 				<td>@product.Price</td>
-				<td>@product.Unit</td>
+				<td>@product.ProductUnit</td>
 				<td>@Html.ActionLink("Просмотр", "Index", new { id = product.Id });</td>
 				@if (Access.CheckRole("Product.Updater"))
 				{

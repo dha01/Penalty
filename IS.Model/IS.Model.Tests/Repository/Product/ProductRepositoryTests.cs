@@ -48,7 +48,7 @@ namespace IS.Model.Tests.Repository.Product
 				Name = "Test1",
 				Position = 3,
 				Price = 31,
-				Unit = ProductUnit.Kilogram
+				ProductUnit = ProductUnit.Kilogram
 			};
 			_productNew = new ProductItem()
 			{
@@ -57,7 +57,7 @@ namespace IS.Model.Tests.Repository.Product
 				Name = "Test2",
 				Position = 1,
 				Price = 54,
-				Unit = ProductUnit.Liter
+				ProductUnit = ProductUnit.Liter
 			};
 		}
 
@@ -91,7 +91,7 @@ namespace IS.Model.Tests.Repository.Product
 			Assert.AreEqual(first_product.ProductType, second_product.ProductType);
 			Assert.AreEqual(first_product.Position, second_product.Position);
 			Assert.AreEqual(first_product.Price, second_product.Price);
-			Assert.AreEqual(first_product.Unit, second_product.Unit);
+			Assert.AreEqual(first_product.ProductUnit, second_product.ProductUnit);
 		}
 
 		#endregion

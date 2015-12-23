@@ -25,9 +25,11 @@ select
 	p.expiration_date ExpirationDate,
 	p.price Price,
 	p.position Position,
-	p.product_type ProductType,
-	p.unit Unit
+	t.code ProductType,
+	u.code ProductUnit
 from Product.product p
+	join Product.product_type t on p.product_type = t.product_type
+	join Product.product_unit u on p.product_unit = u.product_unit
 where p.product = @id", new { id });
 			}
 		}
@@ -47,8 +49,8 @@ set
 	expiration_date = @ExpirationDate,
 	price = @Price,
 	position = @Position,
-	product_type = @ProductType,
-	unit = @Unit
+	product_type = (select top 1 t.product_type from Product.product_type t where t.code = @ProductType),
+	product_unit = (select top 1 u.product_unit from Product.product_unit u where u.code = @ProductUnit)
 where product = @Id", product);
 			}
 		}
@@ -70,7 +72,7 @@ insert into Product.product
 	price,
 	position,
 	product_type,
-	unit
+	product_unit
 )
 values
 (
@@ -78,8 +80,8 @@ values
 	@ExpirationDate,
 	@Price,
 	@Position,
-	@ProductType,
-	@Unit
+	(select top 1 t.product_type from Product.product_type t where t.code = @ProductType),
+	(select top 1 u.product_unit from Product.product_unit u where u.code = @ProductUnit)
 )
 select scope_identity()", product);
 			}
@@ -114,9 +116,11 @@ select
 	p.expiration_date ExpirationDate,
 	p.price Price,
 	p.position Position,
-	p.product_type ProductType,
-	p.unit Unit
-from Product.product p");
+	t.code ProductType,
+	u.code ProductUnit
+from Product.product p
+	join Product.product_type t on p.product_type = t.product_type
+	join Product.product_unit u on p.product_unit = u.product_unit");
 			}
 		}
 	}
