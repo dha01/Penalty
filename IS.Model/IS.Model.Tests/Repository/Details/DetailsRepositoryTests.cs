@@ -43,7 +43,7 @@ namespace IS.Model.Tests.Repository.Details
 
 			_details = new DetailsItem()
 			{
-				Name = "testName1"
+				Name = "testName1",
 				ReleaseDate = DateTime.Now.Date,
 				Width = 100,
 				Lenght = 100,
@@ -54,7 +54,7 @@ namespace IS.Model.Tests.Repository.Details
 			};
 			_detailsNew = new DetailsItem()
 			{
-				Name = "testName2"
+				Name = "testName2",
 				ReleaseDate = DateTime.Now.Date,
 				Width = 100,
 				Lenght = 100,

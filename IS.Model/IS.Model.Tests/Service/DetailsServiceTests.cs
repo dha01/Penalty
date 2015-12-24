@@ -57,7 +57,7 @@ namespace IS.Model.Tests.Service
 			{
 				Name = "Test1",
 				ReleaseDate = DateTime.Now.Date,
-				Weight = 100,
+				Width = 100,
 				Height = 100,
 				Lenght = 100,
 				Mass = 100,
