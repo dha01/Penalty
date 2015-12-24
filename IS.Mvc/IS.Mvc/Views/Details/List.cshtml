@@ -1,0 +1,75 @@
+﻿@using IS.Model.Item.Details;
+@using IS.Mvc.Models
+@model List<DetailsItem>
+
+@{
+	ViewBag.Title = "Details List";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+	table {
+		width: 100%; /* Ширина таблицы */
+		border: 4px double black; /* Рамка вокруг таблицы */
+		border-collapse: collapse; /* Отображать только одинарные линии */
+	}
+
+	th {
+		text-align: left; /* Выравнивание по левому краю */
+		background: #ccc; /* Цвет фона ячеек */
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	td {
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+</style>
+
+<h2>Список деталей</h2>
+
+<table id="role">
+	<thead>
+		<tr>
+			<th>Наименование</th>
+			<th>Дата выпуска</th>
+			<th>Ширина</th>
+			<th>Высота</th>
+			<th>Длинна</th>
+			<th>Масса</th>
+			<th>Материал</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var details in Model)
+		{
+			<tr>
+				<td>@details.Name</td>
+				<td>@details.ReleaseDate</td>
+				<td>@details.Width</td>
+				<td>@details.Height</td>
+				<td>@details.Lenght</td>
+				<td>@details.Mass</td>
+				<td>@details.Material</td>
+				<td>@Html.ActionLink("Просмотр", "Index", new { id = details.Id });</td>
+				@if (Access.CheckRole("Details.Updater"))
+				{
+					<td>
+						@Html.ActionLink("Редактировать", "Edit", new { id = details.Id })
+					</td>
+				}
+				@if (Access.CheckRole("Details.Deleter"))
+				{
+					<td>
+						@Html.ActionLink("Удалить", "Delete", new { id = details.Id }, new { onclick = "return confirm('Удалить запись?')" })
+					</td>
+				}
+			</tr>
+		}
+	</tbody>
+</table>
+@if (Access.CheckRole("Details.Creator"))
+{
+	@Html.ActionLink("Добавить новую деталь", "New");
+}

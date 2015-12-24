@@ -35,7 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-
     <Reference Include="Moq">
       <HintPath>..\..\..\External\Moq.4.0.10827\NET40\Moq.dll</HintPath>
     </Reference>
@@ -61,6 +60,7 @@
     <Compile Include="Repository\Cathedra\CathedraRepositoryTests.cs" />
     <Compile Include="Repository\Comment\CommentRepositoryTests.cs" />
     <Compile Include="Repository\Contact\ContactRepositoryTests.cs" />
+    <Compile Include="Repository\Details\DetailsRepositoryTests.cs" />
     <Compile Include="Repository\Discipline\DisciplineRepositoryTests.cs" />
     <Compile Include="Repository\Faculty\FacultyRepositoryTests.cs" />
     <Compile Include="Repository\Housing\HousingRespositoryTest.cs" />
@@ -74,6 +74,7 @@
     <Compile Include="Service\CommentServiceTests.cs" />
     <Compile Include="Service\ContactServiceTests.cs" />
     <Compile Include="Service\PersonServiceTests.cs" />
+    <Compile Include="Service\DetailsServiceTests.cs" />
     <Compile Include="Service\DisciplineServiceTests.cs" />
     <Compile Include="Service\SpecialtyDetailServiceTest.cs" />
     <Compile Include="Service\TaskServiceTests.cs" />
@@ -85,7 +86,6 @@
     <Compile Include="Service\UserServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="production.App.config" />
     <None Include="packages.config" />
   </ItemGroup>
