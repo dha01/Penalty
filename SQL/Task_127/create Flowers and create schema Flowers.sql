@@ -25,8 +25,8 @@ insert into Flowers.flowers(
 	)
 	values
 	('Роза',
-	'Шиповниковые',
-	'Красный',
+	'Shipownikovie',
+	'Red',
 	'Да',
 	'Да',
 	90
