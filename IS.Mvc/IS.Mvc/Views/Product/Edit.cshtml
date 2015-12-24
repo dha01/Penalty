@@ -88,7 +88,7 @@
 				Единица измерения
 			</td>
 			<td>
-				<select name="Unit">
+				<select name="ProductUnit">
 					@foreach (string name in Enum.GetNames(typeof(ProductUnit)))
 					{
 						if (name.Equals(Enum.GetName(typeof(ProductUnit), Model.ProductUnit)))

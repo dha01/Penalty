@@ -58,7 +58,7 @@ namespace IS.Model.Tests.Service
 				Name = "Test1",
 				Position = 3,
 				Price = 12,
-				Unit = ProductUnit.Liter
+				ProductUnit = ProductUnit.Liter
 			};
 		}
 
