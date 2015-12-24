@@ -1,0 +1,59 @@
+﻿@using IS.Model.Item.Flowers;
+@using IS.Mvc.Models
+@model FlowersItem
+
+@{
+	ViewBag.Title = "Index";
+}
+
+<style>
+	table {
+		border: 4px double black; /* Рамка вокруг таблицы */
+		border-collapse: collapse; /* Отображать только одинарные линии */
+	}
+
+	td:first-child {
+		text-align: left; /* Выравнивание по левому краю */
+		background: #ccc; /* Цвет фона ячеек */
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	td {
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+</style>
+
+<table class="table flowers">
+	<tr>
+		<td>Название</td>
+		<td>@Model.Name</td>
+	</tr>
+	<tr>
+		<td>Семейство</td>
+		<td>@Model.Family</td>
+	</tr>
+	<tr>
+		<td>Цвет цветка</td>
+		<td>@Model.Color</td>
+	</tr>
+	<tr>
+		<td>Наличие шипов</td>
+		<td>@Model.Thorns</td>
+	</tr>
+	<tr>
+		<td>Тип цветка</td>
+		<td>@Model.LongTerm</td>
+	</tr>
+	<tr>
+		<td>Высота цветка</td>
+		<td>@Model.Height</td>
+	</tr>
+</table>
+@Html.ActionLink("Просмотр списка цветов", "List")<br/>
+@Html.ActionLink("Редактировать", "Edit", new { id = Model.Id })
+@if (Access.CheckRole("Flowers.Updater"))
+{
+	@Html.ActionLink("Редактировать", "Edit", new { id = Model.Id })
+}

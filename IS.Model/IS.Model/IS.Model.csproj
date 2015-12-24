@@ -48,6 +48,7 @@
     <Compile Include="Item\Calendar\SemesterItem.cs" />
     <Compile Include="Item\Contact\ContactItem.cs" />
     <Compile Include="Item\Discipline\DisciplineItem.cs" />
+    <Compile Include="Item\Flowers\FlowersItem.cs" />
     <Compile Include="Item\Person\PersonItem.cs" />
     <Compile Include="Item\Role.cs" />
     <Compile Include="Item\Specialty\PlanItem.cs" />
@@ -70,6 +71,8 @@
     <Compile Include="Repository\Discipline\IDisciplineRepository.cs" />
     <Compile Include="Repository\Discipline\DisciplineRepository.cs" />
     <Compile Include="Repository\Cathedra\ICathedraRepository.cs" />
+    <Compile Include="Repository\Flowers\FlowersRepository.cs" />
+    <Compile Include="Repository\Flowers\IFlowersRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Item\Housing\HousingItem.cs" />
     <Compile Include="Repository\Housing\HousingRepository.cs" />
@@ -98,6 +101,7 @@
     <Compile Include="Service\CathedraService.cs" />
     <Compile Include="Service\CommentService.cs" />
     <Compile Include="Service\ContactService.cs" />
+    <Compile Include="Service\FlowersService.cs" />
     <Compile Include="Service\FacultyService.cs" />
     <Compile Include="Service\HousingService.cs" />
     <Compile Include="Service\PersonService.cs" />
