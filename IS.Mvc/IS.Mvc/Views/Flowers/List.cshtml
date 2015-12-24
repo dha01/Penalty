@@ -1,0 +1,66 @@
+﻿@using IS.Model.Item.Flowers;
+@using IS.Mvc.Models
+@model List<FlowersItem>
+
+@{
+	ViewBag.Title = "Flowers List";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+	table {
+		width: 100%; /* Ширина таблицы */
+		border: 4px double black; /* Рамка вокруг таблицы */
+		border-collapse: collapse; /* Отображать только одинарные линии */
+	}
+
+	th {
+		text-align: left; /* Выравнивание по левому краю */
+		background: #ccc; /* Цвет фона ячеек */
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	td {
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+</style>
+
+<h2>Список цветов</h2>
+
+<table id="flowers">
+	<thead>
+		<tr>
+			<th>Название</th>
+			<th>Семейство</th>
+		</tr>	
+	</thead>
+	<tbody>
+	@foreach (var flowers in Model)
+	{
+		<tr>
+			<td>@flowers.Name</td>
+			<td>@flowers.Family</td>
+			<td>@Html.ActionLink("Просмотр", "Index", new { id = flowers.Id })</td>
+			@if (Access.CheckRole("Flowers.Updater"))
+				{
+				<td>
+					@Html.ActionLink("Редактировать", "Edit", new { id = flowers.Id })
+				</td>
+				}
+
+			@if (Access.CheckRole("Flowers.Deleter"))
+				{
+				<td>
+					@Html.ActionLink("Удалить", "Delete", new { id = flowers.Id }, new { onclick = "return confirm('Удалить запись?')" })
+				</td>
+				}
+		</tr>
+	}
+	</tbody>
+</table>
+@if (Access.CheckRole("Flowers.Creator"))
+{
+@Html.ActionLink("Создать запись о цветке", "New")
+}

@@ -1,0 +1,59 @@
+﻿@using IS.Model.Item.Flowers
+@model FlowersItem
+
+@{
+	ViewBag.Title = "Create";
+}
+
+<style>
+	table {
+		border: 4px double black; /* Рамка вокруг таблицы */
+		border-collapse: collapse; /* Отображать только одинарные линии */
+	}
+
+	td:first-child {
+		text-align: left; /* Выравнивание по левому краю */
+		background: #ccc; /* Цвет фона ячеек */
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	td {
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+</style>
+
+<h2>Создание новой записи о цветке</h2>
+
+@using (@Html.BeginForm("Create", "Flowers"))
+{
+	<table class="table flowers">
+		<tr>
+			<td>Название</td>
+			<td><input type="text" name="Name" /></td>
+		</tr>
+		<tr>
+			<td>Семейство</td>
+			<td><input type="text" name="Family" /></td>
+		</tr>
+		<tr>
+			<td>Цвет цветка</td>
+			<td><input type="text" name="Color"/></td>
+		</tr>
+		<tr>
+			<td>Наличие шипов</td>
+			<td><input type="text" name="Thorns"/></td>
+		</tr>
+		<tr>
+			<td>Тип цветка</td>
+			<td><input type="text" name="LongTerm"/></td>
+		</tr>
+		<tr>
+			<td>Высота</td>
+			<td><input type="text" name="Height" /></td>
+		</tr>
+	</table>
+	<input type="submit" value="Создать"/>
+}
+@Html.ActionLink("Просмотр списка цветов", "List")

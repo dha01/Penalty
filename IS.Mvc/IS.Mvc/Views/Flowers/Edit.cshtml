@@ -1,0 +1,63 @@
+﻿@using IS.Model.Item.Flowers;
+@model FlowersItem
+
+@{
+	ViewBag.Title = "Edit";
+}
+
+<style>
+	table {
+		border: 4px double black; /* Рамка вокруг таблицы */
+		border-collapse: collapse; /* Отображать только одинарные линии */
+	}
+
+	td:first-child {
+		text-align: left; /* Выравнивание по левому краю */
+		background: #ccc; /* Цвет фона ячеек */
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+
+	td {
+		padding: 5px; /* Поля вокруг содержимого ячеек */
+		border: 1px solid black; /* Граница вокруг ячеек */
+	}
+</style>
+
+<h2>Редактироание данные цветка</h2>
+
+@using (@Html.BeginForm("Update", "Flowers"))
+{
+	@Html.HiddenFor(m => Model.Id)
+
+	<table class="table flowers">
+		<tr>
+			<td>Название</td>
+			<td>@Html.EditorFor(m => Model.Name)</td>
+		</tr>
+		<tr>
+			<td>Семейство</td>
+			<td>@Html.EditorFor(m => Model.Family)</td>
+		</tr>
+		<tr>
+			<td>Цвет цветка</td>
+			<td>@Html.EditorFor(m => Model.Color)</td>
+		</tr>
+		<tr>
+			<td>Наличие шипов</td>
+			<td>@Html.EditorFor(m => Model.Thorns)</td>
+		</tr>
+		<tr>
+			<td>Тип цветка</td>
+			<td>@Html.EditorFor(m => Model.LongTerm)</td>
+		</tr>
+		<tr>
+			<td>Высота</td>
+			<td>@Html.EditorFor(m => Model.Height)</td>
+		</tr>
+	</table>
+	<input type="submit" value="Сохранить"/><br/>
+	@Html.ActionLink("Просмотр записи о цветке", "Index", new { id = Model.Id })<br />
+	@Html.ActionLink("Отмена", "Index", new { id = Model.Id })
+}
+@Html.ActionLink("Просмотр списка цветов", "List")
